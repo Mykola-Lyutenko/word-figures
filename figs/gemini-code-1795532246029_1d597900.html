@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Межі небезпечних зон крана Liebherr 140 EC-H10</title>
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --surface-subtle: #F8F9FA;
+    --surface-hover: #F1F3F4;
+    --text-primary: #1B1C1D;
+    --text-secondary: #575B5F;
+    --border: #C4C7C5;
+    --grid-line: #E3E6E8;
+    --grid-major: #D0D5D9;
+    --context-fill: #E9ECEF;
+    --context-stroke: #ADB5BD;
+    --road-fill: #F1F3F5;
+    --road-stroke: #CED4DA;
+    --building-fill: #E8F0FE;
+    --building-stroke: #1A73E8;
+    --accent-blue: #1A73E8;
+    --accent-cyan: #12B5CB;
+    --accent-orange: #FA903E;
+    --accent-red: #D93025;
+    --accent-green: #1E8E3E;
+    --forbidden-fill: rgba(217, 48, 37, 0.11);
+    --perimeter-fill: rgba(250, 144, 62, 0.09);
+    --tooltip-bg: #1B1C1D;
+    --tooltip-text: #FFFFFF;
+    --tooltip-muted: #C4C7C5;
+    --btn-bg: #F1F3F4;
+    --btn-active-bg: #1A73E8;
+    --btn-active-text: #FFFFFF;
+    --badge-bg: #FFFFFF;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141414;
+      --surface-subtle: #1E1F21;
+      --surface-hover: #282A2D;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A2A9B0;
+      --border: #4A5050;
+      --grid-line: #232629;
+      --grid-major: #2F3337;
+      --context-fill: #25282B;
+      --context-stroke: #5A6065;
+      --road-fill: #1C1E20;
+      --road-stroke: #3C4043;
+      --building-fill: rgba(26, 115, 232, 0.22);
+      --building-stroke: #669DF6;
+      --accent-blue: #669DF6;
+      --accent-cyan: #24C1E0;
+      --accent-orange: #FA903E;
+      --accent-red: #F28B82;
+      --accent-green: #81C995;
+      --forbidden-fill: rgba(242, 139, 130, 0.14);
+      --perimeter-fill: rgba(250, 144, 62, 0.12);
+      --tooltip-bg: #282A2D;
+      --tooltip-text: #FFFFFF;
+      --tooltip-muted: #A2A9B0;
+      --btn-bg: #232629;
+      --btn-active-bg: #1A73E8;
+      --btn-active-text: #FFFFFF;
+      --badge-bg: #1E1F21;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #141414;
+    --surface-subtle: #1E1F21;
+    --surface-hover: #282A2D;
+    --text-primary: #FFFFFF;
+    --text-secondary: #A2A9B0;
+    --border: #4A5050;
+    --grid-line: #232629;
+    --grid-major: #2F3337;
+    --context-fill: #25282B;
+    --context-stroke: #5A6065;
+    --road-fill: #1C1E20;
+    --road-stroke: #3C4043;
+    --building-fill: rgba(26, 115, 232, 0.22);
+    --building-stroke: #669DF6;
+    --accent-blue: #669DF6;
+    --accent-cyan: #24C1E0;
+    --accent-orange: #FA903E;
+    --accent-red: #F28B82;
+    --accent-green: #81C995;
+    --forbidden-fill: rgba(242, 139, 130, 0.14);
+    --perimeter-fill: rgba(250, 144, 62, 0.12);
+    --tooltip-bg: #282A2D;
+    --tooltip-text: #FFFFFF;
+    --tooltip-muted: #A2A9B0;
+    --btn-bg: #232629;
+    --btn-active-bg: #1A73E8;
+    --btn-active-text: #FFFFFF;
+    --badge-bg: #1E1F21;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px 16px 12px;
+  }
+
+  .visual-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  /* Controls bar */
+  .controls-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .panel-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+  }
+
+  .toggle-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    background: var(--btn-bg);
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid var(--grid-major);
+  }
+
+  .toggle-btn {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .toggle-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .toggle-btn.active {
+    background: var(--btn-active-bg);
+    color: var(--btn-active-text);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .toggle-btn.active .dot {
+    box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.85);
+  }
+
+  /* Top SVG Panel */
+  .plan-wrapper {
+    position: relative;
+    width: 100%;
+    background: var(--surface-subtle);
+    border: 1px solid var(--grid-major);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+
+  svg#site-plan {
+    display: block;
+    width: 100%;
+    height: auto;
+    user-select: none;
+  }
+
+  .zone-interactive {
+    cursor: pointer;
+  }
+
+  .dimmed {
+    opacity: 0.22;
+  }
+
+  .highlighted-stroke {
+    stroke-width: 3 !important;
+  }
+
+  /* Bottom Stacked Bar Chart Panel */
+  .chart-panel {
+    margin-bottom: 16px;
+  }
+
+  .chart-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .legend-swatch.split-scatter {
+    background: linear-gradient(135deg, var(--accent-red) 50%, var(--accent-orange) 50%);
+  }
+
+  .bars-container {
+    position: relative;
+    padding-top: 4px;
+  }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 230px 1fr 56px;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 6px;
+    border-radius: 6px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .bar-row:hover,
+  .bar-row.active-row {
+    background: var(--surface-hover);
+  }
+
+  .bar-row.dimmed-row {
+    opacity: 0.42;
+  }
+
+  .bar-label {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.25;
+  }
+
+  .bar-sublabel {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  .bar-track {
+    position: relative;
+    height: 26px;
+    display: flex;
+    align-items: center;
+  }
+
+  .bar-gridlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .bar-gridline {
+    position: absolute;
+    top: -7px;
+    bottom: -7px;
+    width: 1px;
+    background: var(--grid-line);
+  }
+
+  .bar-stack {
+    position: relative;
+    display: flex;
+    height: 22px;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .bar-seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFFFFF;
+    position: relative;
+    cursor: pointer;
+    border-right: 1px solid var(--bg);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar-seg:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  .bar-seg:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-right: none;
+  }
+
+  .seg-reach {
+    background-color: #1A73E8;
+  }
+
+  .seg-halfload {
+    background-color: #12B5CB;
+  }
+
+  .seg-scatter-crane {
+    background-color: #D93025;
+  }
+
+  .seg-scatter-bldg {
+    background-color: #FA903E;
+  }
+
+  .seg-tiny-label {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .bar-total {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .axis-row {
+    display: grid;
+    grid-template-columns: 230px 1fr 56px;
+    gap: 10px;
+    padding: 4px 6px 0;
+  }
+
+  .axis-track {
+    position: relative;
+    height: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .axis-tick {
+    position: absolute;
+    top: 3px;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .axis-tick.first {
+    transform: translateX(0);
+  }
+
+  .axis-tick.last {
+    transform: translateX(-100%);
+  }
+
+  /* Caption & Sources */
+  .caption {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .caption b {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .sources {
+    font-size: 12px;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--grid-line);
+    padding-top: 8px;
+  }
+
+  .sources a {
+    color: var(--accent-blue);
+    text-decoration: none;
+  }
+
+  .sources a:hover {
+    text-decoration: underline;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    background: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    max-width: 280px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    display: none;
+  }
+
+  .tooltip-title {
+    font-weight: 600;
+    margin-bottom: 3px;
+    font-size: 12.5px;
+  }
+
+  .tooltip-meta {
+    color: var(--tooltip-muted);
+    font-size: 11.5px;
+  }
+
+  .tooltip-rule {
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 11.5px;
+  }
+
+  /* Responsive adjustments for narrow mobile screens */
+  @media (max-width: 580px) {
+    .container {
+      padding: 12px 10px 10px;
+    }
+    .visual-title {
+      font-size: 16px;
+    }
+    .bar-row {
+      grid-template-columns: 1fr 52px;
+      gap: 4px 8px;
+      padding: 8px 4px;
+    }
+    .bar-label {
+      grid-column: 1 / -1;
+      margin-bottom: 2px;
+    }
+    .axis-row {
+      grid-template-columns: 1fr 52px;
+      gap: 8px;
+      padding: 4px 4px 0;
+    }
+    .axis-spacer {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="visual-title">Межі небезпечних зон крана Liebherr 140 EC-H10 перевищують габарити ділянки й потребують обмеження повороту стріли</h1>
+
+  <!-- Top Panel Controls -->
+  <div class="controls-bar">
+    <span class="panel-label">Масштабований план небезпечних зон (10 м сітка)</span>
+    <div class="toggle-group" role="group" aria-label="Вибір сценарію небезпечної зони крана">
+      <button type="button" class="toggle-btn active" data-mode="both">Обидві зони</button>
+      <button type="button" class="toggle-btn" data-mode="bucket">
+        <span class="dot" style="background:#12B5CB;"></span>Баддя БП-1,6 (43,1 м)
+      </button>
+      <button type="button" class="toggle-btn" data-mode="rebar">
+        <span class="dot" style="background:#D93025;"></span>Арматура 6 м (45,0 м)
+      </button>
+    </div>
+  </div>
+
+  <!-- Top Panel: Scaled 2D CAD-Style SVG Plan -->
+  <div class="plan-wrapper">
+    <svg id="site-plan" viewBox="0 0 760 465" role="img" aria-label="Масштабований план небезпечних зон баштового крана Liebherr 140 EC-H10 та 16-поверхової будівлі у м. Житомирі">
+      <defs>
+        <!-- Red diagonal hatch for forbidden slew sector -->
+        <pattern id="forbidden-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="8" stroke="var(--accent-red)" stroke-width="1.4" stroke-opacity="0.45" />
+        </pattern>
+        <!-- Subtle hatch for existing 2-5 story brick buildings -->
+        <pattern id="existing-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+          <line x1="0" y1="0" x2="0" y2="6" stroke="var(--context-stroke)" stroke-width="0.9" stroke-opacity="0.55" />
+        </pattern>
+        <!-- Arrowhead markers -->
+        <marker id="arrow-dim" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 1 1 L 7 4 L 1 7 z" fill="var(--text-secondary)" />
+        </marker>
+        <marker id="arrow-red" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 1 1 L 7 4 L 1 7 z" fill="var(--accent-red)" />
+        </marker>
+      </defs>
+
+      <!-- Background 10m metric grid (1 m = 4.6 px; 10 m = 46 px; centered on crane at 365, 218) -->
+      <g id="metric-grid" stroke="var(--grid-line)" stroke-width="1">
+        <!-- Vertical lines: x = 365 + k*46 -->
+        <line x1="43" y1="0" x2="43" y2="465" />
+        <line x1="89" y1="0" x2="89" y2="465" />
+        <line x1="135" y1="0" x2="135" y2="465" />
+        <line x1="181" y1="0" x2="181" y2="465" />
+        <line x1="227" y1="0" x2="227" y2="465" />
+        <line x1="273" y1="0" x2="273" y2="465" />
+        <line x1="319" y1="0" x2="319" y2="465" />
+        <line x1="365" y1="0" x2="365" y2="465" stroke="var(--grid-major)" stroke-dasharray="4,4" />
+        <line x1="411" y1="0" x2="411" y2="465" />
+        <line x1="457" y1="0" x2="457" y2="465" />
+        <line x1="503" y1="0" x2="503" y2="465" />
+        <line x1="549" y1="0" x2="549" y2="465" />
+        <line x1="595" y1="0" x2="595" y2="465" />
+        <line x1="641" y1="0" x2="641" y2="465" />
+        <line x1="687" y1="0" x2="687" y2="465" />
+        <line x1="733" y1="0" x2="733" y2="465" />
+        <!-- Horizontal lines: y = 218 + k*46 -->
+        <line x1="0" y1="34" x2="760" y2="34" />
+        <line x1="0" y1="80" x2="760" y2="80" />
+        <line x1="0" y1="126" x2="760" y2="126" />
+        <line x1="0" y1="172" x2="760" y2="172" />
+        <line x1="0" y1="218" x2="760" y2="218" stroke="var(--grid-major)" stroke-dasharray="4,4" />
+        <line x1="0" y1="264" x2="760" y2="264" />
+        <line x1="0" y1="310" x2="760" y2="310" />
+        <line x1="0" y1="356" x2="760" y2="356" />
+        <line x1="0" y1="402" x2="760" y2="402" />
+        <line x1="0" y1="448" x2="760" y2="448" />
+      </g>
+
+      <!-- Urban Context: Krylov Lane (south/southwest) & existing 2-5 story brick residential buildings -->
+      <g id="urban-context">
+        <!-- Krylov Lane road strip -->
+        <path d="M 105 398 L 265 362 L 560 362 L 560 385 L 270 385 L 112 422 Z"
+              fill="var(--road-fill)" stroke="var(--road-stroke)" stroke-width="1" />
+        <text x="468" y="377" font-size="10.5" font-style="italic" fill="var(--text-secondary)" letter-spacing="0.03em">пров. Крилова</text>
+
+        <!-- Existing 2-5 story brick residential buildings (south & southwest) -->
+        <g fill="var(--context-fill)" stroke="var(--context-stroke)" stroke-width="1.1">
+          <!-- Southwest 2-story brick house -->
+          <rect x="172" y="290" width="58" height="44" rx="1" />
+          <rect x="172" y="290" width="58" height="44" rx="1" fill="url(#existing-hatch)" />
+          <!-- South 5-story brick residential building -->
+          <rect x="268" y="394" width="136" height="42" rx="1" />
+          <rect x="268" y="394" width="136" height="42" rx="1" fill="url(#existing-hatch)" />
+          <!-- Southeast 2-story building -->
+          <rect x="424" y="394" width="76" height="36" rx="1" />
+          <rect x="424" y="394" width="76" height="36" rx="1" fill="url(#existing-hatch)" />
+        </g>
+        <text x="201" y="316" text-anchor="middle" font-size="9.5" font-weight="500" fill="var(--text-secondary)">2 пов.</text>
+        <text x="336" y="419" text-anchor="middle" font-size="10" font-weight="500" fill="var(--text-secondary)">Житловий будинок (5 пов.)</text>
+        <text x="462" y="416" text-anchor="middle" font-size="9.5" font-weight="500" fill="var(--text-secondary)">2 пов.</text>
+      </g>
+
+      <!-- Forbidden Slew Sector (South / Southwest toward Krylov Lane & existing 2-5 story housing) -->
+      <g id="zone-forbidden" class="zone-interactive" data-zone="forbidden">
+        <path d="M 365 218 L 274.26 404.05 A 207 207 0 0 1 166.02 160.94 Z"
+              fill="var(--forbidden-fill)" />
+        <path d="M 365 218 L 274.26 404.05 A 207 207 0 0 1 166.02 160.94 Z"
+              fill="url(#forbidden-hatch)" stroke="var(--accent-red)" stroke-width="1.3" stroke-opacity="0.7" />
+      </g>
+
+      <!-- Concentric Crane Danger & Reach Zones centered at (365, 218) -->
+      <!-- 1. Rebar 6 m danger zone: R = 45.0 m = 207.0 px -->
+      <circle id="ring-rebar" class="zone-interactive" data-zone="rebar"
+              cx="365" cy="218" r="207"
+              fill="none" stroke="var(--accent-red)" stroke-width="2.2" stroke-dasharray="8,4" />
+
+      <!-- 2. Concrete bucket BP-1.6 danger zone: R = 43.1 m = 198.26 px -->
+      <circle id="ring-bucket" class="zone-interactive" data-zone="bucket"
+              cx="365" cy="218" r="198.26"
+              fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-dasharray="6,4" />
+
+      <!-- 3. Limited trolley reach: R = 32.0 m = 147.2 px -->
+      <circle id="ring-limit" class="zone-interactive" data-zone="limit"
+              cx="365" cy="218" r="147.2"
+              fill="none" stroke="var(--accent-blue)" stroke-width="1.8" />
+
+      <!-- 4. Working reach: R = 28.0 m = 128.8 px -->
+      <circle id="ring-work" class="zone-interactive" data-zone="work"
+              cx="365" cy="218" r="128.8"
+              fill="none" stroke="var(--accent-blue)" stroke-width="1.4" stroke-dasharray="4,4" stroke-opacity="0.85" />
+
+      <!-- Site Boundary: 0.12 ha = 1,200 m² (37.5 m x 32.0 m -> 172.5 x 147.2 px) -->
+      <g id="site-boundary" class="zone-interactive" data-zone="site">
+        <rect x="278.75" y="208.8" width="172.5" height="147.2"
+              fill="none" stroke="var(--text-primary)" stroke-width="1.6" stroke-dasharray="10,4,2,4" />
+      </g>
+
+      <!-- Building Perimeter Danger Zone: +7.0 m (32.2 px) around 27.9 x 24.0 m footprint -->
+      <g id="zone-perimeter" class="zone-interactive" data-zone="perimeter">
+        <rect x="268.63" y="206.5" width="192.74" height="174.8" rx="32.2" ry="32.2"
+              fill="var(--perimeter-fill)" stroke="var(--accent-orange)" stroke-width="2" stroke-dasharray="6,3" />
+      </g>
+
+      <!-- 16-Story Monolithic Building Footprint: 27.9 m x 24.0 m (128.34 x 110.4 px) -->
+      <g id="building-footprint" class="zone-interactive" data-zone="building">
+        <rect x="300.83" y="238.7" width="128.34" height="110.4"
+              fill="var(--building-fill)" stroke="var(--building-stroke)" stroke-width="2.2" />
+        <!-- Structural grid hint inside building -->
+        <line x1="343.6" y1="238.7" x2="343.6" y2="349.1" stroke="var(--building-stroke)" stroke-width="0.6" stroke-opacity="0.35" />
+        <line x1="386.4" y1="238.7" x2="386.4" y2="349.1" stroke="var(--building-stroke)" stroke-width="0.6" stroke-opacity="0.35" />
+        <line x1="300.83" y1="275.5" x2="429.17" y2="275.5" stroke="var(--building-stroke)" stroke-width="0.6" stroke-opacity="0.35" />
+        <line x1="300.83" y1="312.3" x2="429.17" y2="312.3" stroke="var(--building-stroke)" stroke-width="0.6" stroke-opacity="0.35" />
+        <!-- Building labels -->
+        <text x="365" y="286" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--text-primary)">Секція № 9 (16 пов.)</text>
+        <text x="365" y="302" text-anchor="middle" font-size="10.5" font-weight="500" fill="var(--text-secondary)">27,9 × 24,0 м</text>
+        <text x="365" y="316" text-anchor="middle" font-size="10.5" font-weight="500" fill="var(--text-secondary)">H = 52,20 м</text>
+      </g>
+
+      <!-- Civil Protection Sign Indicator (100x60 cm) at site entrance -->
+      <g id="cp-sign" class="zone-interactive" data-zone="sign" transform="translate(451, 326)">
+        <rect x="-5" y="-4" width="10" height="7" rx="1" fill="#FCC934" stroke="var(--text-primary)" stroke-width="1" />
+        <line x1="-2" y1="-1" x2="2" y2="-1" stroke="#1B1C1D" stroke-width="1" />
+        <line x1="-2" y1="1" x2="2" y2="1" stroke="#1B1C1D" stroke-width="1" />
+      </g>
+
+      <!-- Tower Crane Liebherr 140 EC-H10: centered at (365, 218), offset 4.5 m from north facade -->
+      <g id="tower-crane" class="zone-interactive" data-zone="crane">
+        <!-- Anchor tie to building north facade (4.5 m = 20.7 px) -->
+        <line x1="365" y1="224" x2="365" y2="238.7" stroke="var(--text-primary)" stroke-width="2" />
+        <text x="371" y="233" font-size="9" font-weight="600" fill="var(--text-primary)">4,5 м</text>
+
+        <!-- Crane Jib -->
+        <line x1="322.1" y1="244.8" x2="489.8" y2="140.0" stroke="var(--text-primary)" stroke-width="2.4" stroke-linecap="round" />
+        <!-- Counterweight block -->
+        <rect x="319" y="239" width="10" height="10" transform="rotate(-32 324 244)" fill="var(--text-secondary)" stroke="var(--text-primary)" stroke-width="1" />
+        <!-- Trolley position at R = 28 m -->
+        <circle cx="474.2" cy="149.7" r="4" fill="var(--accent-blue)" stroke="var(--bg)" stroke-width="1.2" />
+        <!-- Crane mast square -->
+        <rect x="359" y="212" width="12" height="12" fill="var(--badge-bg)" stroke="var(--text-primary)" stroke-width="1.8" />
+        <line x1="359" y1="212" x2="371" y2="224" stroke="var(--text-primary)" stroke-width="1.1" />
+        <line x1="371" y1="212" x2="359" y2="224" stroke="var(--text-primary)" stroke-width="1.1" />
+      </g>
+
+      <!-- Clean Margin Callouts & Dimension Leaders -->
+      <g id="callouts-right" font-size="11">
+        <!-- R = 45.0 m (rebar) -->
+        <polyline points="528,89 586,44 600,44" fill="none" stroke="var(--accent-red)" stroke-width="1.2" />
+        <circle cx="528" cy="89" r="2.8" fill="var(--accent-red)" />
+        <text x="605" y="42" font-weight="700" fill="var(--accent-red)">R = 45,0 м</text>
+        <text x="605" y="55" font-size="10" fill="var(--text-secondary)">Небезпечна зона</text>
+        <text x="605" y="67" font-size="10" fill="var(--text-secondary)">(арматура 6 м)</text>
+
+        <!-- R = 43.1 m (bucket) -->
+        <polyline points="541,126 586,102 600,102" fill="none" stroke="var(--accent-cyan)" stroke-width="1.2" />
+        <circle cx="541" cy="126" r="2.8" fill="var(--accent-cyan)" />
+        <text x="605" y="100" font-weight="700" fill="var(--accent-cyan)">R = 43,1 м</text>
+        <text x="605" y="113" font-size="10" fill="var(--text-secondary)">Небезпечна зона</text>
+        <text x="605" y="125" font-size="10" fill="var(--text-secondary)">(баддя БП-1,6)</text>
+
+        <!-- R = 32.0 m (limited reach) -->
+        <polyline points="504,170 586,162 600,162" fill="none" stroke="var(--accent-blue)" stroke-width="1.2" />
+        <circle cx="504" cy="170" r="2.8" fill="var(--accent-blue)" />
+        <text x="605" y="160" font-weight="700" fill="var(--accent-blue)">R = 32,0 м</text>
+        <text x="605" y="173" font-size="10" fill="var(--text-secondary)">Обмежений виліт</text>
+        <text x="605" y="185" font-size="10" fill="var(--text-secondary)">каретки крана</text>
+
+        <!-- R = 28.0 m (working reach) -->
+        <polyline points="493,228 586,222 600,222" fill="none" stroke="var(--accent-blue)" stroke-width="1.1" stroke-dasharray="3,2" />
+        <circle cx="493" cy="228" r="2.5" fill="var(--accent-blue)" />
+        <text x="605" y="220" font-weight="600" fill="var(--accent-blue)">R = 28,0 м</text>
+        <text x="605" y="233" font-size="10" fill="var(--text-secondary)">Монтажний виліт</text>
+
+        <!-- +7.0 m building perimeter danger zone -->
+        <polyline points="461,284 586,284 600,284" fill="none" stroke="var(--accent-orange)" stroke-width="1.2" />
+        <circle cx="461" cy="284" r="2.8" fill="var(--accent-orange)" />
+        <text x="605" y="282" font-weight="700" fill="var(--accent-orange)">+7,0 м від стін</text>
+        <text x="605" y="295" font-size="10" fill="var(--text-secondary)">Зона відльоту</text>
+        <text x="605" y="307" font-size="10" fill="var(--text-secondary)">(Табл. Е.1, H=52,2 м)</text>
+
+        <!-- Civil Protection Sign 100x60 cm & Site Boundary -->
+        <polyline points="457,326 586,342 600,342" fill="none" stroke="var(--text-secondary)" stroke-width="1.1" />
+        <text x="605" y="340" font-weight="600" fill="var(--text-primary)">Знак ЦЗ 100×60 см</text>
+        <text x="605" y="353" font-size="10" fill="var(--text-secondary)">Межа ділянки 0,12 га</text>
+        <text x="605" y="365" font-size="10" fill="var(--text-secondary)">(1 200 м²)</text>
+      </g>
+
+      <!-- Left side callouts: Crane info & Forbidden Slew Zone -->
+      <g id="callouts-left">
+        <!-- Top-left crane badge -->
+        <rect x="14" y="14" width="166" height="58" rx="6" fill="var(--badge-bg)" stroke="var(--grid-major)" stroke-width="1" />
+        <text x="24" y="32" font-size="11.5" font-weight="700" fill="var(--text-primary)">Liebherr 140 EC-H10</text>
+        <text x="24" y="47" font-size="10.5" fill="var(--text-secondary)">H під гаком = 68,1 м</text>
+        <text x="24" y="61" font-size="10.5" fill="var(--text-secondary)">Прив'язка до каркасу: 4,5 м</text>
+
+        <!-- Forbidden slew zone label box on left -->
+        <rect x="14" y="210" width="144" height="72" rx="6" fill="var(--badge-bg)" stroke="var(--accent-red)" stroke-width="1.2" />
+        <text x="23" y="227" font-size="10.5" font-weight="700" fill="var(--accent-red)">Зона заборони повороту</text>
+        <text x="23" y="242" font-size="10" fill="var(--text-secondary)">Пров. Крилова та існуюча</text>
+        <text x="23" y="255" font-size="10" fill="var(--text-secondary)">житлова забудова (2–5 пов.)</text>
+        <text x="23" y="270" font-size="9.5" font-weight="600" fill="var(--accent-red)">→ Електронний обмежувач</text>
+        <line x1="158" y1="246" x2="210" y2="246" stroke="var(--accent-red)" stroke-width="1.3" marker-end="url(#arrow-red)" />
+      </g>
+
+      <!-- North Arrow (Bottom-right) -->
+      <g id="north-arrow" transform="translate(722, 412)">
+        <circle cx="0" cy="0" r="18" fill="var(--badge-bg)" stroke="var(--grid-major)" stroke-width="1" />
+        <polygon points="0,-13 4.5,3 0,-1 -4.5,3" fill="var(--text-primary)" />
+        <text x="0" y="13" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--text-secondary)">Пн</text>
+      </g>
+
+      <!-- Metric Scale Bar (0–20 m = 92 px) at Bottom-left -->
+      <g id="scale-bar" transform="translate(18, 434)">
+        <rect x="0" y="0" width="46" height="5" fill="var(--text-primary)" />
+        <rect x="46" y="0" width="46" height="5" fill="var(--badge-bg)" stroke="var(--text-primary)" stroke-width="1" />
+        <line x1="0" y1="-3" x2="0" y2="6" stroke="var(--text-primary)" stroke-width="1" />
+        <line x1="46" y1="-3" x2="46" y2="6" stroke="var(--text-primary)" stroke-width="1" />
+        <line x1="92" y1="-3" x2="92" y2="6" stroke="var(--text-primary)" stroke-width="1" />
+        <text x="0" y="17" font-size="10" fill="var(--text-secondary)">0</text>
+        <text x="46" y="17" text-anchor="middle" font-size="10" fill="var(--text-secondary)">10</text>
+        <text x="92" y="17" text-anchor="middle" font-size="10" fill="var(--text-secondary)">20 м</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Bottom Panel: Horizontal Stacked Bar Chart -->
+  <div class="chart-panel">
+    <div class="chart-header">
+      <span class="panel-label">Розкладання радіусів небезпечних зон на складові (м)</span>
+      <div class="legend">
+        <span class="legend-item">
+          <span class="legend-swatch" style="background:#1A73E8;"></span>Виліт стріли (R<sub>кр</sub>)
+        </span>
+        <span class="legend-item">
+          <span class="legend-swatch" style="background:#12B5CB;"></span>0,5 габариту вантажу
+        </span>
+        <span class="legend-item">
+          <span class="legend-swatch split-scatter"></span>Відліт за Табл. Е.1 (S<sub>кр</sub> / S<sub>буд</sub>)
+        </span>
+      </div>
+    </div>
+
+    <div class="bars-container" id="bars-container"></div>
+
+    <div class="axis-row">
+      <div class="axis-spacer"></div>
+      <div class="axis-track">
+        <span class="axis-tick first" style="left:0%;">0 м</span>
+        <span class="axis-tick" style="left:20%;">10</span>
+        <span class="axis-tick" style="left:40%;">20</span>
+        <span class="axis-tick" style="left:60%;">30</span>
+        <span class="axis-tick" style="left:80%;">40</span>
+        <span class="axis-tick last" style="left:100%;">50 м</span>
+      </div>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- Caption & Sources -->
+  <p class="caption">
+    <b>Розрахункова схема небезпечних зон за ДБН А.3.2-2-2009 (Додаток Е, Табл. Е.1)</b> для 16-поверхової секції № 9 (висота 52,20 м) та баштового крана Liebherr 140 EC-H10 (висота під гаком 68,1 м). Верхня панель показує масштабований план зони відльоту предметів від стін (+7,0 м), робочого (28 м) та обмеженого (32 м) вильоту каретки й небезпечних зон крана (43,1 м для бадді БП-1,6 та 45,0 м для арматури 6 м) із виділенням забороненого сектора повороту в бік існуючої житлової забудови по пров. Крилова. Нижня панель розкладає кожен радіус на нормативні складові.
+  </p>
+
+  <div class="sources">
+    Джерела даних: <a href="https://dnaop.com/html/33719_24.html" target="_blank" rel="noopener noreferrer">ДБН А.3.2-2-2009 (Додаток Е, Табл. Е.1)</a>; інженерні розрахунки параметрів безпеки праці дипломного проєкту.
+  </div>
+</div>
+
+<!-- Hover Tooltip -->
+<div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  window.addEventListener('message', function (event) {
+    if (event.data && (event.data.theme === 'light' || event.data.theme === 'dark')) {
+      document.documentElement.setAttribute('data-theme', event.data.theme);
+    }
+  });
+
+  const radiiBreakdown = [
+    {
+      id: 'perimeter',
+      scenario: 'Периметр будівлі',
+      sublabel: 'H = 52,20 м (від зовнішніх стін)',
+      reach: 0,
+      halfLoad: 0,
+      scatter: 7.0,
+      total: 7.0,
+      scatterType: 'bldg',
+      interpText: 'Інтерполяція: 6,29 м → прийнято консервативно 7,0 м (інтервал «до 70 м»).',
+      restriction: 'Обов’язкове захисне огородження по периметру та захисні козирки над входами.'
+    },
+    {
+      id: 'work',
+      scenario: 'Кран: монтажний виліт + арматура 6 м',
+      sublabel: 'Rкр = 28,0 м; lвант = 6,0 м',
+      reach: 28.0,
+      halfLoad: 3.0,
+      scatter: 10.0,
+      total: 41.0,
+      scatterType: 'crane',
+      interpText: 'Sкр (інтерп. для H = 68,1 м): 9,89 м → прийнято 10,0 м за Табл. Е.1.',
+      restriction: 'Контроль стропування довгомірних пакетів арматури; робота лише за командами стропальника.'
+    },
+    {
+      id: 'bucket',
+      scenario: 'Кран: обмежений виліт + баддя БП-1,6',
+      sublabel: 'Rкр = 32,0 м; lвант = 2,2 м',
+      reach: 32.0,
+      halfLoad: 1.1,
+      scatter: 10.0,
+      total: 43.1,
+      scatterType: 'crane',
+      interpText: 'Sкр (інтерп. для H = 68,1 м): 9,89 м → прийнято 10,0 м за Табл. Е.1.',
+      restriction: 'Обмеження вильоту каретки на 32,0 м; заборона пронесення бадді над пров. Крилова.'
+    },
+    {
+      id: 'rebar',
+      scenario: 'Кран: обмежений виліт + арматура 6 м',
+      sublabel: 'Rкр = 32,0 м; lвант = 6,0 м',
+      reach: 32.0,
+      halfLoad: 3.0,
+      scatter: 10.0,
+      total: 45.0,
+      scatterType: 'crane',
+      interpText: 'Максимальна розрахункова небезпечна зона (Sкр = 10,0 м за Табл. Е.1).',
+      restriction: 'Виходить за межі ділянки 0,12 га — обов’язковий електронний обмежувач повороту стріли.'
+    }
+  ];
+
+  const zoneTooltips = {
+    rebar: {
+      title: 'Небезпечна зона крана: арматура / опалубка 6 м — 45,0 м',
+      meta: 'Формула: 32,0 м (виліт) + 3,0 м (0,5·l) + 10,0 м (Sкр за Табл. Е.1). Інтерп. Sкр = 9,89 м.',
+      rule: 'Перекриває пров. Крилова та сусідні будинки — обов’язкове блокування повороту стріли.'
+    },
+    bucket: {
+      title: 'Небезпечна зона крана: бетонна баддя БП-1,6 — 43,1 м',
+      meta: 'Формула: 32,0 м (виліт) + 1,1 м (0,5·2,2 м) + 10,0 м (Sкр за Табл. Е.1). Інтерп. Sкр = 9,89 м.',
+      rule: 'Потребує електронного обмеження вильоту каретки (32 м) і сектора повороту.'
+    },
+    limit: {
+      title: 'Обмежений виліт каретки крана — R = 32,0 м',
+      meta: 'Максимальний паспортний виліт Liebherr 140 EC-H10 становить 45,0 м; у проєкті обмежено до 32,0 м.',
+      rule: 'Покриває весь контур секції № 9 (макс. відстань до далекого кута ≈ 31,7 м).'
+    },
+    work: {
+      title: 'Розрахунковий монтажний виліт — R = 28,0 м',
+      meta: 'Робочий виліт для основної зони бетонування та армування перекриттів (Rнеб з арматурою = 41,0 м).',
+      rule: 'Дозволяє оптимізувати вантажопідйомність і зменшити небезпечну зону на 4,0 м.'
+    },
+    perimeter: {
+      title: 'Небезпечна зона по периметру будівлі — +7,0 м',
+      meta: 'Hбуд = 52,20 м. Інтерполяція за Табл. Е.1: 6,29 м → прийнято консервативно 7,0 м (до 70 м).',
+      rule: 'Прохід людей заборонено; над входами влаштовуються захисні козирки.'
+    },
+    forbidden: {
+      title: 'Заборонений сектор повороту стріли',
+      meta: 'Південний / південно-західний напрямок: пров. Крилова та житлова забудова (2–5 пов.).',
+      rule: 'Встановлюється електронний обмежувач повороту (slew-limiter) баштового крана.'
+    },
+    building: {
+      title: '16-поверхова монолітна секція № 9',
+      meta: 'Габарити в плані: 27,9 × 24,0 м; загальна висота: 52,20 м (м. Житомир).',
+      rule: 'Зона монолітних робіт обладнується інвентарним огородженням та уловлювальними сітками.'
+    },
+    crane: {
+      title: 'Баштовий кран Liebherr 140 EC-H10',
+      meta: 'Висота під гаком: 68,1 м; відстань від осі башти до фасаду: 4,5 м (з прив’язкою до каркасу).',
+      rule: 'Обов’язкове захисне заземлення (R ≤ 4 Ом) та обмежувачі робочих рухів.'
+    },
+    site: {
+      title: 'Межа будівельного майданчика — 0,12 га (1 200 м²)',
+      meta: 'Стиснені умови міської забудови в м. Житомирі.',
+      rule: 'Периметр огороджується суцільним парканом; виїзд обладнується мийкою коліс.'
+    },
+    sign: {
+      title: 'Знак цивільного захисту 100×60 см',
+      meta: 'Інформаційно-попереджувальний знак на межі будівельного майданчика.',
+      rule: 'Інформує про межі небезпечних зон, відповідальних осіб та порядок дій під час тривоги.'
+    }
+  };
+
+  function fmtUk(num) {
+    return num.toFixed(1).replace('.', ',');
+  }
+
+  const barsContainer = document.getElementById('bars-container');
+  const MAX_VAL = 50.0;
+
+  radiiBreakdown.forEach(function (item) {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.dataset.id = item.id;
+
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'bar-label';
+    labelDiv.innerHTML = item.scenario + '<span class="bar-sublabel">' + item.sublabel + '</span>';
+
+    const track = document.createElement('div');
+    track.className = 'bar-track';
+
+    const gridlines = document.createElement('div');
+    gridlines.className = 'bar-gridlines';
+    [0, 20, 40, 60, 80, 100].forEach(function (pct) {
+      const gl = document.createElement('div');
+      gl.className = 'bar-gridline';
+      gl.style.left = pct + '%';
+      gridlines.appendChild(gl);
+    });
+    track.appendChild(gridlines);
+
+    const stack = document.createElement('div');
+    stack.className = 'bar-stack';
+
+    if (item.reach > 0) {
+      const segReach = document.createElement('div');
+      segReach.className = 'bar-seg seg-reach';
+      segReach.style.width = (item.reach / MAX_VAL * 100) + '%';
+      segReach.textContent = fmtUk(item.reach);
+      attachTooltip(segReach, {
+        title: item.scenario + ' — Виліт стріли',
+        meta: 'Складова Rкр = ' + fmtUk(item.reach) + ' м (із загального радіуса ' + fmtUk(item.total) + ' м).',
+        rule: item.restriction
+      });
+      stack.appendChild(segReach);
+    }
+
+    if (item.halfLoad > 0) {
+      const segHalf = document.createElement('div');
+      segHalf.className = 'bar-seg seg-halfload';
+      segHalf.style.width = (item.halfLoad / MAX_VAL * 100) + '%';
+      if (item.halfLoad >= 2.5) {
+        segHalf.textContent = fmtUk(item.halfLoad);
+      } else {
+        const tiny = document.createElement('span');
+        tiny.className = 'seg-tiny-label';
+        tiny.textContent = fmtUk(item.halfLoad);
+        segHalf.appendChild(tiny);
+      }
+      attachTooltip(segHalf, {
+        title: item.scenario + ' — 0,5 габариту вантажу',
+        meta: 'Складова 0,5·lвант = ' + fmtUk(item.halfLoad) + ' м (повний габарит ' + fmtUk(item.halfLoad * 2) + ' м).',
+        rule: item.restriction
+      });
+      stack.appendChild(segHalf);
+    }
+
+    if (item.scatter > 0) {
+      const segScatter = document.createElement('div');
+      segScatter.className = 'bar-seg ' + (item.scatterType === 'bldg' ? 'seg-scatter-bldg' : 'seg-scatter-crane');
+      segScatter.style.width = (item.scatter / MAX_VAL * 100) + '%';
+      segScatter.textContent = fmtUk(item.scatter);
+      attachTooltip(segScatter, {
+        title: item.scenario + ' — Відліт за Табл. Е.1',
+        meta: 'Нормативний відліт = ' + fmtUk(item.scatter) + ' м. ' + item.interpText,
+        rule: item.restriction
+      });
+      stack.appendChild(segScatter);
+    }
+
+    track.appendChild(stack);
+
+    const totalDiv = document.createElement('div');
+    totalDiv.className = 'bar-total';
+    totalDiv.textContent = fmtUk(item.total) + ' м';
+
+    row.appendChild(labelDiv);
+    row.appendChild(track);
+    row.appendChild(totalDiv);
+    barsContainer.appendChild(row);
+  });
+
+  const tooltipEl = document.getElementById('tooltip');
+
+  function showTooltip(e, data) {
+    tooltipEl.innerHTML =
+      '<div class="tooltip-title">' + data.title + '</div>' +
+      '<div class="tooltip-meta">' + data.meta + '</div>' +
+      (data.rule ? '<div class="tooltip-rule">' + data.rule + '</div>' : '');
+    tooltipEl.style.display = 'block';
+    positionTooltip(e);
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    const rect = tooltipEl.getBoundingClientRect();
+    let x = e.clientX + 14;
+    let y = e.clientY + 14;
+    if (x + rect.width + pad > window.innerWidth) {
+      x = e.clientX - rect.width - 14;
+    }
+    if (y + rect.height + pad > window.innerHeight) {
+      y = e.clientY - rect.height - 14;
+    }
+    if (x < pad) x = pad;
+    if (y < pad) y = pad;
+    tooltipEl.style.left = x + 'px';
+    tooltipEl.style.top = y + 'px';
+  }
+
+  function hideTooltip() {
+    tooltipEl.style.display = 'none';
+  }
+
+  function attachTooltip(el, data) {
+    el.addEventListener('mouseenter', function (e) { showTooltip(e, data); });
+    el.addEventListener('mousemove', positionTooltip);
+    el.addEventListener('mouseleave', hideTooltip);
+  }
+
+  document.querySelectorAll('#site-plan .zone-interactive').forEach(function (el) {
+    const key = el.dataset.zone;
+    if (zoneTooltips[key]) {
+      attachTooltip(el, zoneTooltips[key]);
+    }
+  });
+
+  const ringBucket = document.getElementById('ring-bucket');
+  const ringRebar = document.getElementById('ring-rebar');
+  const buttons = document.querySelectorAll('.toggle-btn');
+
+  function setMode(mode) {
+    buttons.forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+
+    ringBucket.classList.remove('dimmed', 'highlighted-stroke');
+    ringRebar.classList.remove('dimmed', 'highlighted-stroke');
+
+    const rows = document.querySelectorAll('.bar-row');
+    rows.forEach(function (r) {
+      r.classList.remove('active-row', 'dimmed-row');
+    });
+
+    if (mode === 'bucket') {
+      ringBucket.classList.add('highlighted-stroke');
+      ringRebar.classList.add('dimmed');
+      rows.forEach(function (r) {
+        if (r.dataset.id === 'bucket') r.classList.add('active-row');
+        else if (r.dataset.id === 'rebar') r.classList.add('dimmed-row');
+      });
+    } else if (mode === 'rebar') {
+      ringRebar.classList.add('highlighted-stroke');
+      ringBucket.classList.add('dimmed');
+      rows.forEach(function (r) {
+        if (r.dataset.id === 'rebar') r.classList.add('active-row');
+        else if (r.dataset.id === 'bucket') r.classList.add('dimmed-row');
+      });
+    }
+  }
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setMode(btn.dataset.mode);
+    });
+  });
+})();
+</script>
+</body>
+</html>
